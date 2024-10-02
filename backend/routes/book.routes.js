@@ -1,15 +1,15 @@
 module.exports = app => {
-    const shops = require("../controllers/book.controller.js");
+    const books = require("../controllers/book.controller.js");
 
     var router = require("express").Router();
 
-    router.post("/", shops.create);
+    router.post("/", books.create);
 
-    router.get("/", shops.findAll);
+    router.get("/", books.findAll);
 
-    router.put("/", shops.update);
+    router.put("/", books.update);
 
-    router.delete("/", shops.delete);
+    router.delete("/", books.delete);
 
     app.use("/api/home", router);
 }
