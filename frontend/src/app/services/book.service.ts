@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class BookService {
 
-  endpoint = `http://localhost:8080/api/my-books`
+  endpoint = `http://localhost:8080/api/books`
 
   constructor(private httpClient: HttpClient) { }
 

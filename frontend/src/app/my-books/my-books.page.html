@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>my-books</ion-title>
+    <ion-title>My books</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -10,4 +10,70 @@
       <ion-title size="large">my-books</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-list>
+    <!-- *ngFor para recorrer los libros -->
+    <ion-item *ngFor="let book of books">
+      <ion-card>
+        <ion-card-header>
+            <ion-card-title>{{ book.title }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            <ng-container *ngIf="!book.isEditing; else editTemplate">
+                <p><strong>Author:</strong> {{ book.author }}</p>
+                <p><strong>Genre:</strong> {{ book.genre }}</p>
+                <p><strong>Pages:</strong> {{ book.numPages }}</p>
+                <p><strong>Started reading:</strong> {{ book.startDate }}</p>
+                <p><strong>Read:</strong> 
+                  <ion-checkbox [(ngModel)]="book.readCheck" (ionChange)="markRead(book.id)" [disabled]="book.readCheck"></ion-checkbox>
+                </p>
+                <p><strong>Finished reading:</strong> {{ book.finishDate || 'Unfinished' }}</p>
+
+                <!-- Botones de editar y eliminar -->
+                <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                    <ion-button color="danger" (click)="deleteBook(book.id)">Delete</ion-button>
+                    <ion-button color="primary" (click)="editBook(book)">Edit</ion-button>
+                </div>
+            </ng-container>
+
+            <ng-template #editTemplate>
+                <form (ngSubmit)="updateBook(book)">
+                    <ion-item>
+                        <ion-label position="stacked">Title</ion-label>
+                        <ion-input [(ngModel)]="book.title" name="title" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Author</ion-label>
+                        <ion-input [(ngModel)]="book.author" name="author" required></ion-input>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Genre</ion-label>
+                        <ion-select [(ngModel)]="book.genre" name="genre">
+                            <ion-select-option value="Fiction">Fiction</ion-select-option>
+                            <ion-select-option value="Non-Fiction">Non-Fiction</ion-select-option>
+                            <ion-select-option value="Fantasy">Fantasy</ion-select-option>
+                            <ion-select-option value="Science">Science</ion-select-option>
+                            <ion-select-option value="Other">Other</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                    <ion-item>
+                        <ion-label position="stacked">Pages</ion-label>
+                        <ion-input type="number" [(ngModel)]="book.numPages" name="numPages" required></ion-input>
+                    </ion-item>
+                    
+                    <div style="display: flex; justify-content: space-between; margin-top: 20px;">
+                        <ion-button expand="full" type="submit">Update</ion-button>
+                        <ion-button expand="full" color="light" (click)="editBook(book)">Cancel</ion-button>
+                    </div>
+                </form>
+            </ng-template>
+        </ion-card-content>
+    </ion-card>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- Botón para agregar un nuevo libro -->
+  <!--<ion-button expand="full" (click)="create()">Add Book</ion-button>-->
+
 </ion-content>
