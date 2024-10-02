@@ -45,66 +45,79 @@ exports.findAll = (req, res) => {
 };
 
 exports.findOne = (req, res) => {
+    const id = req.params.id;
 
+    Book.findByPk(id)
+        .then(data => {
+            if (!data) {
+                res.status(404).send({ message: "Book not found." });
+            } else {
+                res.send(data);
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving the book."
+            });
+        });
 };
 
 exports.update = (req, res) => {
     // Obtener el ID de los parámetros de la URL
-    /*const id = req.params.id;
+    const id = req.params.id;
 
     // Verificar que el ID no sea undefined
     if (!id) {
         return res.status(400).send({
-            message: "ID can not be empty!" // Respuesta si el ID está vacío
+            message: "Not a valid ID" // Respuesta si el ID está vacío
         });
     }
 
-    Shop.update(req.body, { where: {id: id}})
+    Book.update(req.body, { where: {id: id}})
     .then(() => {
-        console.log("Entry updated");
-        res.send({message: "Updated"});
-    })*/
+        console.log("Book updated");
+        res.send({message: "Book updated"});
+    })
 };
 
 //Cambia el campo readCheck a true
-
-exports.updateReadCheck = async (req, res) => { //async para hacer la función asíncrona y que no bloquee el código
-    try{
-        
-        // Toma la ID de la url
+exports.updateReadCheck = async (req, res) => {
+    try {
+        // Toma la ID de la URL
         const id = req.params.id;
 
-        // Actualiza el campo readCheck con la ID
-        // Con await el código espera a que la db se actualice antes de seguir ejecutándose
-        // En updated se guarda un valor que nos dice si se ha hecho algún cambio (1) o no (0)
-        const [updated] = await Book.update( 
-            { readCheck: true },
-            { where: { id: id} }
-        );
+        // Primero, busca el libro en la base de datos
+        const book = await Book.findByPk(id); // Busca el libro por ID
 
-        // Comprobamos si se ha actualizado correctamente mirando la variable updated
-        if (updated) {
-            res.status(200).send({ message: "Book was marked as read" });
-        } else {
-            res.status(404).send({ message: "Book not found" });
+        // Verifica si el libro existe
+        if (!book) {
+            return res.status(404).send({ message: "Book not found." });
         }
+
+        // Cambia el valor de readCheck a true
+        book.readCheck = true;
+
+        // Guarda los cambios en la db (esto activará el hook beforeUpdate del modelo)
+        await book.save();
+
+        res.status(200).send({ message: "Book was marked as read", book });
     } catch (error) {
-        res.status(500).send({ message: error.message })
+        res.status(500).send({ message: error.message });
     }
 };
 
 exports.delete = (req, res) => {
-    /*const id = req.params.id;
+    const id = req.params.id;
 
-    Shop.destroy({ where: { id: id}})
+    Book.destroy({ where: { id: id}})
     .then(() => {
-        console.log("Entry erased");
-        res.send({message: "Erased"});
+        console.log("Book erased");
+        res.send({message: "Book erased"});
     })
     .catch(err => {
         res.status(500).send({
             message:
-                err.message || "Some error ocurred while updating the shop"
+                err.message || "Some error ocurred while deleting the book"
         });
-    });*/
+    });
 };

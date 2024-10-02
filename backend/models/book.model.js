@@ -37,6 +37,7 @@ module.exports = (sequelize, Sequelize) => {
       // Hook que se ejecuta antes de que el modelo actualice para guardar la fecha final
       hooks: {
         beforeUpdate: (book) => {
+          console.log('Before update hook called');
           if (book.readCheck === true && !book.finishDate) {
             book.finishDate = new Date(); // Asigna la fecha actual
           }

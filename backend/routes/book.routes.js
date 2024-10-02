@@ -7,11 +7,13 @@ module.exports = app => {
 
     router.get("/", books.findAll);
 
-    router.get(":id/", books.findOne);
+    router.get("/:id", books.findOne);
 
-    router.put(":id/", books.update);
+    router.put("/:id/update", books.update);
 
-    router.delete(":id/", books.delete);
+    router.put("/:id/readcheck", books.updateReadCheck);
+
+    router.delete("/:id", books.delete);
 
     app.use("/api/books", router);
 }
