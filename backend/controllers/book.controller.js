@@ -1,31 +1,35 @@
 const db = require("../models");
-const Shop = db.shops;
+const Book = db.books;
 
 exports.create = (req, res) => {
 
-    /*if (!req.body.brand){
-        res.status(400).send({
-            message: "Content can not be empty!"
+    //Validacion del request
+    if (!req.body.title || !req.body.author || !req.body.numPages) {
+        return res.status(400).send({
+            message: "Required fields can not be empty"
         });
-        return;
-    }*/
+    }
 
-    /*const shop = {
-        address: req.body.address,
-        telephone: req.body.telephone
+    //Creacion del objeto Book
+    const book = {
+        title: req.body.title,
+        author: req.body.author,
+        genre: req.body.genre,
+        numPages: req.body.numPages,
     };
 
-    Shop.create(shop)
-        .then((data) => {
+    //Guardado en la base de datos
+    Book.create(book)
+        .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error ocurred while creating the shop"
+                    err.message || "Some error occurred while creating the book"
             });
-        });*/
-}
+        });
+};
 
 exports.findAll = (req, res) => {
     /*Shop.findAll()
@@ -38,11 +42,11 @@ exports.findAll = (req, res) => {
                 err.message || "Some error ocurred while retrieving shops"
         });
     });*/
-}
+};
 
 exports.findOne = (req, res) => {
 
-}
+};
 
 exports.update = (req, res) => {
     // Obtener el ID de los parámetros de la URL
@@ -60,7 +64,7 @@ exports.update = (req, res) => {
         console.log("Entry updated");
         res.send({message: "Updated"});
     })*/
-}
+};
 
 exports.delete = (req, res) => {
     /*const id = req.params.id;
@@ -76,4 +80,4 @@ exports.delete = (req, res) => {
                 err.message || "Some error ocurred while updating the shop"
         });
     });*/
-}
+};
