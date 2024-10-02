@@ -5,7 +5,9 @@ module.exports = app => {
 
     router.post("/", books.create);
 
-    router.get(":id/", books.findAll);
+    router.get("/", books.findAll);
+
+    router.get(":id/", books.findOne);
 
     router.put(":id/", books.update);
 
