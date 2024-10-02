@@ -43,6 +43,10 @@ export class BookService {
     body.append("genre", updatedData.genre);
     body.append("numPages", updatedData.numPages);
 
-    return this.httpClient.post(`${this.endpoint}/${id}`, body.toString(), { headers });
+    return this.httpClient.put(`${this.endpoint}/${id}/update`, body.toString(), { headers });
+  }
+
+  updateRead(id: any) {
+    return this.httpClient.put(`${this.endpoint}/${id}/readcheck`,{}); // {} indica que no queremos pasar ningun body
   }
 }
