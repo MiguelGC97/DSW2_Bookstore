@@ -32,16 +32,16 @@ exports.create = (req, res) => {
 };
 
 exports.findAll = (req, res) => {
-    /*Shop.findAll()
+    Book.findAll()
         .then((data) => {
         res.send(data);
     })
     .catch(err => {
         res.status(500).send({
             message:
-                err.message || "Some error ocurred while retrieving shops"
+                err.message || "Some error ocurred while retrieving books"
         });
-    });*/
+    });
 };
 
 exports.findOne = (req, res) => {

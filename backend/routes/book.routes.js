@@ -5,11 +5,11 @@ module.exports = app => {
 
     router.post("/", books.create);
 
-    router.get("/", books.findAll);
+    router.get(":id/", books.findAll);
 
-    router.put("/", books.update);
+    router.put(":id/", books.update);
 
-    router.delete("/", books.delete);
+    router.delete(":id/", books.delete);
 
-    app.use("/api/home", router);
+    app.use("/api/books", router);
 }
