@@ -1,4 +1,7 @@
+import { BookService } from './../services/book.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-my-books',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyBooksPage implements OnInit {
 
-  constructor() { }
+  books: any = [];
+
+  constructor(private bookService: BookService,
+              private router: Router,
+  ) { }
 
   ngOnInit() {
+    this.getAllBooks();
+  }
+
+  getAllBooks() {
+    this.bookService.getBooks().subscribe(response => {
+      this.books = response;
+    }, error => {
+      console.error('An error ocurred trying to get the books', error);
+    });
   }
 
 }
