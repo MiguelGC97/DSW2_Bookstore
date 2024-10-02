@@ -31,4 +31,18 @@ export class BookService {
   delete(id: any) {
     return this.httpClient.delete(`${this.endpoint}/${id}`);
   }
+
+  update(id: any, updatedData: any) {
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    });
+
+    const body = new URLSearchParams();
+    body.append("title", updatedData.title);
+    body.append("author", updatedData.author);
+    body.append("genre", updatedData.genre);
+    body.append("numPages", updatedData.numPages);
+
+    return this.httpClient.post(`${this.endpoint}/${id}`, body.toString(), { headers });
+  }
 }
