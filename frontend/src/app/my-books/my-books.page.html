@@ -11,6 +11,12 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button (click)="showAddForm = true">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let book of books; let i = index">
@@ -48,20 +54,20 @@
             <ion-item><ion-text>Finished reading:</ion-text> {{ book.finishDate || 'Unfinished' }}</ion-item>
   
             <!-- Botones de editar, guardar y cancelar -->
-            <div *ngIf="!book.isEditing">
+            <ion-item *ngIf="!book.isEditing">
               <ion-button color="primary" (click)="editBook(book)">Edit</ion-button>
               <ion-button color="danger" (click)="deleteBook(book.id)">Delete</ion-button>
-            </div>
-            <div *ngIf="book.isEditing">
+            </ion-item>
+            <ion-item *ngIf="book.isEditing">
               <ion-button color="success" (click)="saveChanges(book)">Save</ion-button>
               <ion-button color="medium" (click)="cancelEdit(book)">Cancel</ion-button>
-            </div>
+            </ion-item>
           </ion-card-content>
         </ion-card>
       </ion-col>
 
       <!-- Tarjeta para añadir un nuevo libro -->
-      <ion-col size="4" *ngIf="showAddForm">
+      <ion-col size="12" size-md="6" size-lg="4" *ngIf="showAddForm">
         <ion-card>
           <ion-card-header>
             <ion-card-title>Add new book</ion-card-title>
@@ -78,8 +84,7 @@
                 <ion-input type="text" name="author" required ngModel></ion-input>
               </ion-item>
               <ion-item>
-                <ion-label position="floating">Genre</ion-label>
-                <ion-select name="genre" required ngModel>
+                <ion-select label="Genre" name="genre" required ngModel>
                   <ion-select-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -94,12 +99,12 @@
         </ion-card>
       </ion-col>
 
-      <!-- Botón para añadir una nueva tarjeta -->
+      <!-- Botón para añadir una nueva tarjeta 
       <ion-col size="4" *ngIf="showAddButton">
         <ion-button expand="block" (click)="showAddForm = true; showAddButton = false">
           <ion-icon name="add-circle-outline"></ion-icon>
         </ion-button>
-      </ion-col>
+      </ion-col>-->
 
     </ion-row>
   </ion-grid>
