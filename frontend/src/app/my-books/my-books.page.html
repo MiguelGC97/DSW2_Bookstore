@@ -13,7 +13,7 @@
 
   <ion-grid>
     <ion-row>
-      <ion-col size="4" *ngFor="let book of books; let i = index">
+      <ion-col size="12" size-md="6" size-lg="4" *ngFor="let book of books; let i = index">
         <ion-card>
           <ion-card-header>
             <!-- Título editable -->
@@ -22,30 +22,30 @@
           </ion-card-header>
           <ion-card-content>
             <!-- Autor editable -->
-            <p><strong>Author:</strong>
-              <span *ngIf="!book.isEditing">{{ book.author }}</span>
+            <ion-item><ion-text>Author:</ion-text>
+              <ion-text *ngIf="!book.isEditing">{{ book.author }}</ion-text>
               <ion-input *ngIf="book.isEditing" [(ngModel)]="book.author"></ion-input>
-            </p>
+            </ion-item>
   
             <!-- Género editable con dropdown -->
-            <p><strong>Genre:</strong>
-              <span *ngIf="!book.isEditing">{{ book.genre }}</span>
+            <ion-item><ion-text>Genre:</ion-text>
+              <ion-text *ngIf="!book.isEditing">{{ book.genre }}</ion-text>
               <ion-select *ngIf="book.isEditing" [(ngModel)]="book.genre">
                 <ion-select-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</ion-select-option>
               </ion-select>
-            </p>
+            </ion-item>
   
             <!-- Número de páginas editable -->
-            <p><strong>Pages:</strong>
-              <span *ngIf="!book.isEditing">{{ book.numPages }}</span>
+            <ion-item><ion-text>Pages:</ion-text>
+              <ion-text *ngIf="!book.isEditing">{{ book.numPages }}</ion-text>
               <ion-input *ngIf="book.isEditing" type="number" [(ngModel)]="book.numPages"></ion-input>
-            </p>
+            </ion-item>
   
-            <p><strong>Started reading:</strong> {{ book.startDate }}</p>
-            <p><strong>Read </strong>
+            <ion-item><ion-text>Started reading:</ion-text> {{ book.startDate }}</ion-item>
+            <ion-item><ion-text>Read </ion-text>
               <ion-checkbox [(ngModel)]="book.readCheck" (ionChange)="markRead(book.id)" [disabled]="book.readCheck"></ion-checkbox>
-            </p>
-            <p><strong>Finished reading:</strong> {{ book.finishDate || 'Unfinished' }}</p>
+            </ion-item>
+            <ion-item><ion-text>Finished reading:</ion-text> {{ book.finishDate || 'Unfinished' }}</ion-item>
   
             <!-- Botones de editar, guardar y cancelar -->
             <div *ngIf="!book.isEditing">
