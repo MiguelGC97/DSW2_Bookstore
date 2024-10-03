@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">my-books</ion-title>
+      <ion-title size="large">My books</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -28,13 +28,15 @@
           </ion-card-header>
           <ion-card-content>
             <!-- Autor editable -->
-            <ion-item><ion-text>Author:</ion-text>
+            <ion-item>
+              <ion-text class="ion-margin-end">Author:</ion-text>
               <ion-text *ngIf="!book.isEditing">{{ book.author }}</ion-text>
               <ion-input *ngIf="book.isEditing" [(ngModel)]="book.author"></ion-input>
             </ion-item>
   
             <!-- Género editable con dropdown -->
-            <ion-item><ion-text>Genre:</ion-text>
+            <ion-item>
+              <ion-text class="ion-margin-end">Genre:</ion-text>
               <ion-text *ngIf="!book.isEditing">{{ book.genre }}</ion-text>
               <ion-select *ngIf="book.isEditing" [(ngModel)]="book.genre">
                 <ion-select-option *ngFor="let genre of genres" [value]="genre">{{ genre }}</ion-select-option>
@@ -42,15 +44,25 @@
             </ion-item>
   
             <!-- Número de páginas editable -->
-            <ion-item><ion-text>Pages:</ion-text>
+            <ion-item>
+              <ion-text class="ion-margin-end">Pages:</ion-text>
               <ion-text *ngIf="!book.isEditing">{{ book.numPages }}</ion-text>
               <ion-input *ngIf="book.isEditing" type="number" [(ngModel)]="book.numPages"></ion-input>
             </ion-item>
-  
-            <ion-item><ion-text>Started reading:</ion-text> {{ book.startDate }}</ion-item>
-            <ion-item><ion-text>Read </ion-text>
-              <ion-checkbox [(ngModel)]="book.readCheck" (ionChange)="markRead(book.id)" [disabled]="book.readCheck"></ion-checkbox>
+            
+            <!-- Fecha de inicio, se completa automático con el día en que se añade -->
+            <ion-item>
+              <ion-text class="ion-margin-end">Started reading:</ion-text> 
+              {{ book.startDate }}
             </ion-item>
+
+            <!-- Checkbox para marcar como leido. Actualizará el campo finishDate -->
+            <ion-item>
+              <ion-text>Read </ion-text>
+              <ion-checkbox class="ion-margin-start" [(ngModel)]="book.readCheck" (ionChange)="markRead(book.id)" [disabled]="book.readCheck"></ion-checkbox>
+            </ion-item>
+
+            <!-- Fecha de finalización, se completa automático al marcar readCheck -->
             <ion-item><ion-text>Finished reading:</ion-text> {{ book.finishDate || 'Unfinished' }}</ion-item>
   
             <!-- Botones de editar, guardar y cancelar -->
