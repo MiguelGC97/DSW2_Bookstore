@@ -11,6 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class MyBooksPage implements OnInit {
 
   books: any = [];
+  genres: string[] = ['Fiction', 'Non-Fiction', 'Fantasy', 'Biography', 'Science Fiction'];
+  showAddForm: boolean = false;
+  showAddButton: boolean = true;
 
   constructor(private bookService: BookService,
   ) { }
@@ -27,6 +30,24 @@ export class MyBooksPage implements OnInit {
     });
   }
 
+  addBook(form: any) {
+    if (form.valid) {
+      this.bookService.create(form.value).subscribe(() => {
+        this.showAddForm = false;
+        this.getAllBooks(); // Recargamos la lista de libros
+      });
+    } else {
+      alert('Please fill in all required fields');
+    }
+  }
+
+  cancelAdd(form?: any) {
+    if (form) {
+      form.reset(); // Resetea los valores del formulario
+    }
+    this.showAddForm = false; // Oculta el formulario
+  }
+
   deleteBook(id: any) {
     this.bookService.delete(id).subscribe(response => {
       this.getAllBooks(); //Para que refresque la página
@@ -35,6 +56,18 @@ export class MyBooksPage implements OnInit {
 
   editBook(book: any) {
     book.isEditing = !book.isEditing; // Alternar el modo de edición para el libro
+  }
+
+  cancelEdit(book: any) {
+    book.isEditing = false; // Cancelamos el modo edición
+    this.getAllBooks(); // Volvemos a cargar los libros para restaurar los valores originales
+  }
+
+  saveChanges(book: any) {
+    this.bookService.update(book.id, book).subscribe(() => {
+      book.isEditing = false; // Guardamos y salimos del modo edición
+      this.getAllBooks(); // Volvemos a cargar los libros para actualizar la lista
+    });
   }
 
   updateBook(book: any) {
