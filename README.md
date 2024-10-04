@@ -1,88 +1,86 @@
-# Project Title
+¡Gracias por la información detallada! A continuación te presento el contenido actualizado del archivo `README.md` de acuerdo con tus indicaciones:
 
-One Paragraph of project description goes here
+---
+
+# DSW - ALEXANDRIAN ALEPH - Book Log API
+
+Alexandrian Aleph is an innovative API designed for book lovers to effortlessly track their reading. Users can register the books they are currently reading and record the date they started and finished each book.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will guide you through the process of setting up the project locally.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+Make sure you have the following dependencies installed:
 
-```
-Give examples
-```
+- Node.js (latest version): [https://nodejs.org/en/](https://nodejs.org/en/)
+- MySQL2 (latest version): [https://dev.mysql.com/downloads/installer/](https://dev.mysql.com/downloads/installer/)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
+To set up the project locally, follow these steps:
 
-Say what the step will be
+1. Install **Node.js** from [here](https://nodejs.org/en/) and **MySQL2** from [here](https://dev.mysql.com/downloads/installer/).
+   
+2. Clone the repository to your local machine using Git:
 
-```
-Give the example
-```
+   ```bash
+   git clone https://github.com/MiguelGC97/DSW2_Bookstore
+   ```
 
-And repeat
+3. Navigate to the root directory of the project and install the necessary dependencies:
 
-```
-until finished
-```
+   ```bash
+   npm install express mySql2 sequelize cors
+   ```
 
-End with an example of getting some data out of the system or using it for a little demo
+4. Install the **Ionic CLI** globally to run the frontend:
 
-## Running the tests
+   ```bash
+   npm install -g @ionic/cli
+   ```
 
-Explain how to run the automated tests for this system
+### Running the Application
 
-### Break down into end to end tests
+To run the API locally, follow these steps:
 
-Explain what these tests test and why
+1. Navigate to the backend directory and start the backend server:
 
-```
-Give an example
-```
+   ```bash
+   cd backend/
+   node index.js
+   ```
 
-### And coding style tests
+2. Navigate to the frontend directory and run the frontend:
 
-Explain what these tests test and why
+   ```bash
+   cd frontend/
+   ionic serve
+   ```
 
-```
-Give an example
-```
+After running these commands, the API and the frontend should be up and running.
 
-## Deployment
+### Testing the API with Postman
 
-Add additional notes about how to deploy this on a live system
+To test the API endpoints using Postman, please refer to the documentation at:
+
+[Postman Documentation](https://documenter.getpostman.com/view/38432288/2sAXxMfD5G)
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+- **Node.js** - JavaScript runtime for backend development
+- **Express** - Web framework for Node.js
+- **Sequelize** - ORM for MySQL
+- **MySQL2** - Database management
+- **Ionic** - Framework for building mobile and web apps
+- **Angular** - Frontend framework
 
-## Contributing
+## Author
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+- **Miguel Ángel Gutiérrez Carreño**
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+This project is licensed under the MIT License - see the LICENSE.md file for details
 
