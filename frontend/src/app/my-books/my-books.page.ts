@@ -12,7 +12,7 @@ import { IonContent } from '@ionic/angular';
 export class MyBooksPage implements OnInit {
 
   books: any = [];
-  genres: string[] = ['Fiction', 'Non-Fiction', 'Fantasy', 'Biography', 'Science Fiction'];
+  genres: string[] = ['Adventure', 'Biography', 'Fantasy', 'Historical Fiction', 'Horror', 'Mystery', 'Noir', 'Romance', 'Science Fiction', 'Thriller'];
   showAddForm: boolean = false;
   showAddButton: boolean = true;
 
