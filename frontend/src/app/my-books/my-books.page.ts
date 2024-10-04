@@ -1,7 +1,8 @@
 import { BookService } from './../services/book.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { IonContent } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-books',
@@ -15,7 +16,12 @@ export class MyBooksPage implements OnInit {
   showAddForm: boolean = false;
   showAddButton: boolean = true;
 
+  //Propiedad que permite la funcionalidad scrollToBottom. El ? en content lo marca como opcional.
+  @ViewChild(IonContent, { static: false }) content?: IonContent;
+
   constructor(private bookService: BookService,
+              private router: Router,
+              private zone: NgZone // Para poder ejecutar codigo despues de que Angular ejecute el DOM
   ) { }
 
   ngOnInit() {
@@ -34,11 +40,28 @@ export class MyBooksPage implements OnInit {
     if (form.valid) {
       this.bookService.create(form.value).subscribe(() => {
         this.showAddForm = false;
-        this.getAllBooks(); // Recargamos la lista de libros
+        this.getAllBooks(); // Recargamos la lista de libros        
       });
     } else {
       alert('Please fill in all required fields');
     }
+  }
+
+  showNewBookForm() {
+    
+    //Hace visible el formulario de añadir nuevo libro
+    this.showAddForm = true;
+
+    //Usamos NgZone para asegurarnos de que se llama al scrollToBottom despues de actualizar el DOM
+    this.zone.run(() => {
+      setTimeout(() => { // Añade un delay como garantía adicional de que ha dado tiempo de actualizar el DOM
+        //Nos aseguramos de que content no sea undefined antes de llamar al scrollToBottom
+        if (this.content) {
+        this.content.scrollToBottom(350); // Llamamos al scrollToBottom
+        }
+      }, 100); //Delay de 50 ms
+    });
+    
   }
 
   cancelAdd(form?: any) {
@@ -91,4 +114,7 @@ export class MyBooksPage implements OnInit {
     });
   }
 
+  gotoHome() {
+    this.router.navigateByUrl("/")
+  }
 }

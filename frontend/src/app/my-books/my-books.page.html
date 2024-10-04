@@ -1,18 +1,37 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>My books</ion-title>
+
+    <ion-buttons slot="start" class="ion-hide-lg-up">
+      <ion-button (click)="gotoHome()">
+        <ion-icon name="home" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start" class="ion-hide-lg-down">
+      <ion-button (click)="gotoHome()">
+        <ion-icon name="home" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center">My library</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">My books</ion-title>
+      <ion-title size="large">My library</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
-    <ion-fab-button (click)="showAddForm = true">
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed" class="ion-hide-lg-up">
+    <ion-fab-button (click)="showNewBookForm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" class="ion-hide-lg-down">
+    <ion-fab-button (click)="showNewBookForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -63,9 +82,12 @@
             </ion-item>
 
             <!-- Fecha de finalización, se completa automático al marcar readCheck -->
-            <ion-item><ion-text>Finished reading:</ion-text> {{ book.finishDate || 'Unfinished' }}</ion-item>
+            <ion-item>
+              <ion-text class="ion-margin-end">Finished reading:</ion-text> 
+              {{ book.finishDate || 'Unfinished' }}
+            </ion-item>
   
-            <!-- Botones de editar, guardar y cancelar -->
+            <!-- Botones de editar y borrar para la tarjeta y guardar y cancelar para el modo edición-->
             <ion-item *ngIf="!book.isEditing">
               <ion-button color="primary" (click)="editBook(book)">Edit</ion-button>
               <ion-button color="danger" (click)="deleteBook(book.id)">Delete</ion-button>
@@ -110,13 +132,6 @@
           </ion-card-content>
         </ion-card>
       </ion-col>
-
-      <!-- Botón para añadir una nueva tarjeta 
-      <ion-col size="4" *ngIf="showAddButton">
-        <ion-button expand="block" (click)="showAddForm = true; showAddButton = false">
-          <ion-icon name="add-circle-outline"></ion-icon>
-        </ion-button>
-      </ion-col>-->
 
     </ion-row>
   </ion-grid>

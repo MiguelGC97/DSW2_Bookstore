@@ -76,7 +76,7 @@ exports.update = (req, res) => {
     Book.update(req.body, { where: {id: id}})
     .then(() => {
         console.log("Book updated");
-        res.send({message: "Book updated"});
+        res.status(200).send({message: "Book updated"});
     })
 };
 
