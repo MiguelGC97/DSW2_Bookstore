@@ -1,7 +1,3 @@
-¡Gracias por la información detallada! A continuación te presento el contenido actualizado del archivo `README.md` de acuerdo con tus indicaciones:
-
----
-
 # DSW - ALEXANDRIAN ALEPH - Book Log API
 
 Alexandrian Aleph is an innovative API designed for book lovers to effortlessly track their reading. Users can register the books they are currently reading and record the date they started and finished each book.
