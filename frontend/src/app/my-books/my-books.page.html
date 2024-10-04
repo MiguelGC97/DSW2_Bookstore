@@ -24,7 +24,7 @@
     </ion-toolbar>
   </ion-header>
 
-  <ion-fab horizontal="center" vertical="bottom" slot="fixed" class="ion-hide-lg-up">
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed" class="ion-hide-lg-up" *ngIf="!showAddForm">
     <ion-fab-button (click)="showNewBookForm()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
